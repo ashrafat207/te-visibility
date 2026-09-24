@@ -1,0 +1,28 @@
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+
+# Node
+node_modules/
+dist/
+.vercel/
+
+# Supabase local
+supabase/.temp/
+supabase/.branches/
+
+# Eval outputs
+evals/reports/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
