@@ -3,6 +3,9 @@
 .env.*
 !.env.example
 
+# real exports never go in the repo
+data/real/
+
 # Python
 __pycache__/
 *.pyc
@@ -13,6 +16,7 @@ __pycache__/
 node_modules/
 dist/
 .vercel/
+*.tsbuildinfo
 
 # Supabase local
 supabase/.temp/
