@@ -34,17 +34,21 @@ export function Reconcile() {
 
   return (
     <div>
-      <h1>Reconcile</h1>
-      <p className="muted">Flags from the Reconciliation Agent: status, reason and the rows it cites.</p>
+      <div className="page-head reveal">
+        <div className="lead">
+          <h1>Reconciliation</h1>
+          <div className="page-sub">Flags from the Reconciliation Agent: status, reason, and the rows it cites.</div>
+        </div>
+      </div>
       {error && <p className="error">{error}</p>}
 
       {flags.length === 0 ? (
-        <p className="muted">
-          No flags yet — the Reconciliation Agent hasn't been built (see <code>agents/</code> and <code>README.md</code>). Once it
-          runs, every trip and orphan charge will get a status and a reason here, and analysts can override or dismiss.
-        </p>
+        <div className="empty-state reveal reveal-1">
+          No flags yet — the Reconciliation Agent hasn&rsquo;t been built (see <code>agents/</code> and <code>README.md</code>). Once it runs, every trip
+          and orphan charge will get a status and a reason here, and analysts can override or dismiss.
+        </div>
       ) : (
-        <table className="table">
+        <table className="table reveal reveal-1">
           <thead>
             <tr>
               <th>Trip / charge</th>
@@ -65,10 +69,10 @@ export function Reconcile() {
                   <StatusBadge status={f.analyst_status_override ?? f.status} />
                   {f.dismissed_reason && <span className="badge badge-gray">dismissed</span>}
                 </td>
-                <td>
+                <td className="num">
                   <Money value={f.amount_outstanding} />
                 </td>
-                <td>{f.days_outstanding ?? '—'}</td>
+                <td className="num">{f.days_outstanding ?? '—'}</td>
                 <td className="reason-cell">{f.reason}</td>
                 {canEdit && (
                   <td>

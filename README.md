@@ -46,7 +46,7 @@ npm install
 npm run dev
 ```
 
-Six screens (Home, Budget, Trips, Reconcile, Digest, Scenarios), all reading Supabase views through the browser's publishable key — row-level security decides what each signed-in role sees. Sign-in is a Supabase magic link; a brand-new sign-in becomes a read-only `viewer` until an admin promotes it in `app_users`. Reconcile and Digest show an empty state until the agents in `agents/` are built. To deploy: Vercel project rooted at `web/`, framework Vite, with the same two env vars.
+`/` is a public marketing page; the six screens (Home, Budget, Trips, Reconcile, Digest, Scenarios) live under `/app` behind a Supabase magic-link sign-in, all reading Supabase views through the browser's publishable key — row-level security decides what each signed-in role sees. A brand-new sign-in becomes a read-only `viewer` until an admin promotes it in `app_users`. Reconcile and Digest show an empty state until the agents in `agents/` are built. The visual language (Geist / Geist Mono, the warm-neutral palette, the status-chip colors) matches the clickable prototype linked in `context.md`. To deploy: Vercel project rooted at `web/`, framework Vite, with the same two env vars.
 
 ## Secrets
 

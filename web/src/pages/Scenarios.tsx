@@ -51,28 +51,32 @@ export function Scenarios() {
 
   return (
     <div>
-      <h1>Scenarios</h1>
-      <p className="muted">Move planned spend between cost centers and see the net. Moves must sum to zero before a scenario can be submitted.</p>
+      <div className="page-head reveal">
+        <div className="lead">
+          <h1>Scenarios</h1>
+          <div className="page-sub">Move planned spend between cost centres and see the net. Moves must sum to zero before a scenario can be submitted.</div>
+        </div>
+      </div>
       {error && <p className="error">{error}</p>}
 
       {scenarios.length === 0 ? (
-        <p className="muted">No scenarios yet.</p>
+        <div className="empty-state reveal reveal-1">No scenarios yet.</div>
       ) : (
-        scenarios.map((s) => {
+        scenarios.map((s, i) => {
           const rows = moves[s.id] ?? []
           const net = rows.reduce((sum, r) => sum + Number(amountFor(s.id, r)), 0)
           return (
-            <section key={s.id} className="scenario-card">
+            <section key={s.id} className={`scenario-card reveal reveal-${Math.min(i + 1, 5)}`}>
               <header>
                 <h2>
-                  {s.name} <span className="muted">· {s.quarter}</span>
+                  {s.name} <span className="muted" style={{ fontWeight: 400 }}>· {s.quarter}</span>
                 </h2>
                 <StatusBadge status={s.status} />
               </header>
               <table className="table">
                 <thead>
                   <tr>
-                    <th>Cost center</th>
+                    <th>Cost centre</th>
                     <th>Move</th>
                   </tr>
                 </thead>
@@ -89,16 +93,18 @@ export function Scenarios() {
                             onBlur={() => saveMove(s.id, r.cost_center_id)}
                           />
                         ) : (
-                          <Money value={r.amount} />
+                          <span className="num" style={{ display: 'inline-block' }}>
+                            <Money value={r.amount} />
+                          </span>
                         )}
                       </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
-              <footer className={net === 0 ? 'ok' : 'error'}>
+              <div className={`scenario-net ${net === 0 ? '' : 'off'}`}>
                 Net: <Money value={net} /> {net === 0 ? '— balanced, ready to submit' : '— must net to zero before submitting'}
-              </footer>
+              </div>
             </section>
           )
         })
